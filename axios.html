@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<style>
+h1 {
+   text-align: center ;
+   color:orange;
+   
+}
+p {
+    text-align:center;
+     
+}
+form {
+  text-align:left;
+}
+button {
+   margin: 0 auto;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+    <br><br>
+    <h1 class="text-center">Book a call </h1><br>
+    <p class="text-center">Book a call slot and our representative will call you within 1hr of selected time.</p><hr>
+    <form  action="#" onsubmit="oncomplete(event)">
+        <div class="form-floating">
+            <input type="text" id="name" name="name" required placeholder="name here" class="form-control"/><br>
+            <label for="name" class="form-label">Name:</label><br>
+        </div>
+        <div class="form-floating">
+            <input type="email"  name="email" placeholder="your email here"required  class="form-control" /><br>
+            <label  class="form-label">Email</label><br>
+        </div>
+        <div class="form-floating">
+            <input type="number" name="number" required placeholder="number here" class="form-control"/><br>
+            <label class="form-label">Phone:</label><br>
+        </div>
+        <div class="form-floating">
+            <input type="date" name="date" required placeholder="date here" class="form-control"/>
+            <input type="time" name="time" required placeholder="time here" class="form-control"/><br>
+            <label class="form-label"> Time for call:</label><br>
+        </div>
+    
+         <div>
+        <button class="btn-primary-lg"style=" background-color:orangered;color:white">Get a call</button>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.3/axios.min.js"></script>
+        <script>
+            function oncomplete(event){
+                event.preventDefault();
+                const name=event.target.name.value;
+                const email=event.target.email.value;
+                const number=event.target.number.value;
+                 const date=event.target.date.value;
+                const time=event.target.time.value;
+
+                const obj={name,email,number,date,time};
+                axios.post("https://crudcrud.com/api/faad0f2f41814d959416c1449395e184/appointmentdata",obj)
+                .then((res)=>console.log(res)).catch((err)=>console.error(err));
+
+            }
+        </script>
+    </form>
+</div>
+</body>
+</html>
