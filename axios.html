@@ -37,20 +37,21 @@ button {
             <label  class="form-label">Email</label><br>
         </div>
         <div class="form-floating">
-            <input type="number" name="number" required placeholder="number here" class="form-control"/><br>
+            <input type="number"id="number" name="number" required placeholder="number here" class="form-control"/><br>
             <label class="form-label">Phone:</label><br>
         </div>
         <div class="form-floating">
-            <input type="date" name="date" required placeholder="date here" class="form-control"/>
-            <input type="time" name="time" required placeholder="time here" class="form-control"/><br>
+            <input type="date"id="date" name="date" required placeholder="date here" class="form-control"/>
+            <input type="time" id="time" name="time" required placeholder="time here" class="form-control"/><br>
             <label class="form-label"> Time for call:</label><br>
         </div>
-    
+       <ul class="list-group" id="items"></ul>
          <div>
         <button class="btn-primary-lg"style=" background-color:orangered;color:white">Get a call</button>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.3/axios.min.js"></script>
         <script>
+            let objects=[];
             function oncomplete(event){
                 event.preventDefault();
                 const name=event.target.name.value;
@@ -60,9 +61,27 @@ button {
                 const time=event.target.time.value;
 
                 const obj={name,email,number,date,time};
+                objects.push(obj);
                 axios.post("https://crudcrud.com/api/faad0f2f41814d959416c1449395e184/appointmentdata",obj)
                 .then((res)=>console.log(res)).catch((err)=>console.error(err));
 
+            }
+            window.addEventListener("DOMContentLoaded",() =>{
+                axios.get("https://crudcrud.com/api/faad0f2f41814d959416c1449395e184/appointmentdata")
+                .then((response)=>{console.log(response)
+                
+                     for(var i=0;i<response.data.length;i++){
+                        showUserOnScreen(response.data[i]);
+                     }
+
+                })
+                .catch((err)=>console.error(err))
+            })
+            function showUserOnScreen(objects){
+              var itemList=document.getElementById('items');
+               var li=document.createElement('li');
+               li.textContent=`${objects.name}-${objects.email}-${objects.number}-${objects.date}-${objects.time}`;
+               itemList.appendChild(li);
             }
         </script>
     </form>
