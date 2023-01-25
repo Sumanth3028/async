@@ -33,7 +33,7 @@ button {
             <label for="name" class="form-label">Name:</label><br>
         </div>
         <div class="form-floating">
-            <input type="email"  name="email" placeholder="your email here"required  class="form-control" /><br>
+            <input type="email"id="email"  name="email" placeholder="your email here"required  class="form-control" /><br>
             <label  class="form-label">Email</label><br>
         </div>
         <div class="form-floating">
@@ -91,7 +91,20 @@ button {
                    .then(res=>console.log(res)).catch(err=>console.error(err))
 
                }
+               var editbtn=document.createElement('input');
+               editbtn.type='button';
+               editbtn.className='btn-sm';
+               editbtn.value='Edit';
+               editbtn.onclick=()=>{
+                itemList.removeChild(li);
+                document.getElementById('name').value=objects.name;
+                document.getElementById('email').value=objects.email;
+                document.getElementById('number').value=objects.number;
+                document.getElementById('date').value=objects.date;
+                document.getElementById('time').value=objects.time;
+               }
                li.appendChild(delbtn);
+               li.appendChild(editbtn);
                itemList.appendChild(li);
             }
         </script>
