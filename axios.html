@@ -81,6 +81,17 @@ button {
               var itemList=document.getElementById('items');
                var li=document.createElement('li');
                li.textContent=`${objects.name}-${objects.email}-${objects.number}-${objects.date}-${objects.time}`;
+               var delbtn=document.createElement('input');
+               delbtn.type='button';
+               delbtn.className='btn-sm'
+               delbtn.value='delete';
+               delbtn.onclick=() => {
+                itemList.removeChild(li);
+                   axios.delete(`https://crudcrud.com/api/faad0f2f41814d959416c1449395e184/appointmentdata/${objects._id}`)
+                   .then(res=>console.log(res)).catch(err=>console.error(err))
+
+               }
+               li.appendChild(delbtn);
                itemList.appendChild(li);
             }
         </script>
